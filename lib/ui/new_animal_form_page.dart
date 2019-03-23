@@ -76,8 +76,11 @@ class _AddAnimalFormPageState extends State<AddAnimalFormPage> {
   }
 
   submitAnimal(BuildContext context) {
-    if (animalNameController.text.isEmpty) {
-      print('Animal Name can not be empty');
+    if (animalNameController.text.isEmpty ||
+        animalLocationController.text.isEmpty) {
+      Scaffold.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.redAccent,
+          content: Text('Animal Name and Location can not be empty')));
     } else {
       var newAnimal = Dog(animalNameController.text,
           animalLocationController.text, animalDescController.text, 'Breed B');

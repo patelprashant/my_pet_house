@@ -150,8 +150,28 @@ class _AnimalDetailPageState extends State<AnimalDetailPage> {
   }
 
   void updateRating() {
+    if (_ratingValue < 7) {
+      _ratingErrorDialog();
+    }
     setState(() {
       widget.dog.rating = _ratingValue.toInt();
     });
+  }
+
+  Future<Null> _ratingErrorDialog() async {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Warning!'),
+            content: Text('They are good Animal, Brant.'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Try Again'),
+                onPressed: () => Navigator.of(context).pop(),
+              )
+            ],
+          );
+        });
   }
 }
