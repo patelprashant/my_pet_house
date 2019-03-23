@@ -49,13 +49,16 @@ class _AnimalCardState extends State<AnimalCard> {
   }
 
   Widget get animalImage {
-    var animalAvatar = Container(
-      width: 100.0,
-      height: 100.0,
-      decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          image: DecorationImage(
-              fit: BoxFit.cover, image: NetworkImage(renderUrl ?? ''))),
+    var animalAvatar = Hero(
+      tag: animal,
+      child: Container(
+        width: 100.0,
+        height: 100.0,
+        decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            image: DecorationImage(
+                fit: BoxFit.cover, image: NetworkImage(renderUrl ?? ''))),
+      ),
     );
 
     var animalPlaceholder = Container(
