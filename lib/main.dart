@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_pet_house/model/dog_animal.dart';
 import 'package:my_pet_house/ui/dog_list.dart';
+import 'package:my_pet_house/ui/new_animal_form_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -40,11 +41,29 @@ class _MyHomePageState extends State<MyHomePage> {
     ..add(Dog('Buddy', 'North Pole, Earth', 'Self proclaimed human lover.',
         'Breed A'));
 
+  Future _showNewAnimalForm() async {
+    Dog newDog = await Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) {
+      return AddAnimalFormPage();
+    }));
+
+    if (newDog != null) {
+      initialDogList.add(newDog);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: Colors.black87,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: _showNewAnimalForm,
+          ),
+        ],
       ),
       body: Container(
         decoration: BoxDecoration(
