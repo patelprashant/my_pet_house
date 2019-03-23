@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_pet_house/model/animal.dart';
+import 'package:my_pet_house/ui/animal_detail_page.dart';
 
 class AnimalCard extends StatefulWidget {
   final Animal animal;
@@ -24,19 +25,25 @@ class _AnimalCardState extends State<AnimalCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 115.0,
-      child: Stack(
-        children: <Widget>[
-          Positioned(
-            left: 50.0,
-            child: dogCard,
+    return InkWell(
+      onTap: showAnimalDetailPage,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        child: Container(
+          height: 115.0,
+          child: Stack(
+            children: <Widget>[
+              Positioned(
+                left: 50.0,
+                child: animalCard,
+              ),
+              Positioned(
+                top: 7.5,
+                child: animalImage,
+              ),
+            ],
           ),
-          Positioned(
-            top: 7.5,
-            child: animalImage,
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -52,7 +59,7 @@ class _AnimalCardState extends State<AnimalCard> {
     );
   }
 
-  Widget get dogCard {
+  Widget get animalCard {
     return Container(
       width: 290.0,
       height: 115.0,
@@ -92,5 +99,11 @@ class _AnimalCardState extends State<AnimalCard> {
     setState(() {
       renderUrl = animal.imageUrl;
     });
+  }
+
+  void showAnimalDetailPage() {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      return AnimalDetailPage(animal);
+    }));
   }
 }
