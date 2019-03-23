@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'We Rate Dogs'),
+      home: MyHomePage(title: 'We Rate Animals'),
     );
   }
 }

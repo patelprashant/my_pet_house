@@ -83,6 +83,7 @@ class _AnimalCardState extends State<AnimalCard> {
                 children: <Widget>[
                   Icon(
                     Icons.star,
+                    color: Colors.yellowAccent,
                   ),
                   Text(': ${widget.animal.rating} / 10'),
                 ],
