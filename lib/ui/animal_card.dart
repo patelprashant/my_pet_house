@@ -49,13 +49,43 @@ class _AnimalCardState extends State<AnimalCard> {
   }
 
   Widget get animalImage {
-    return Container(
+    var animalAvatar = Container(
       width: 100.0,
       height: 100.0,
       decoration: BoxDecoration(
           shape: BoxShape.circle,
           image: DecorationImage(
               fit: BoxFit.cover, image: NetworkImage(renderUrl ?? ''))),
+    );
+
+    var animalPlaceholder = Container(
+      width: 100.0,
+      height: 100.0,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.black54,
+              Colors.black,
+              Colors.blueGrey[600],
+            ]),
+      ),
+      alignment: Alignment.center,
+      child: Text(
+        'Animals...',
+        textAlign: TextAlign.center,
+      ),
+    );
+
+    return AnimatedCrossFade(
+      firstChild: animalPlaceholder,
+      secondChild: animalAvatar,
+      crossFadeState: renderUrl == null
+          ? CrossFadeState.showFirst
+          : CrossFadeState.showSecond,
+      duration: Duration(microseconds: 1000),
     );
   }
 
