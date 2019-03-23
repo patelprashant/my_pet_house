@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_pet_house/model/dog_animal.dart';
 
 class AddAnimalFormPage extends StatefulWidget {
   @override
@@ -6,6 +7,10 @@ class AddAnimalFormPage extends StatefulWidget {
 }
 
 class _AddAnimalFormPageState extends State<AddAnimalFormPage> {
+  TextEditingController animalNameController = TextEditingController();
+  TextEditingController animalLocationController = TextEditingController();
+  TextEditingController animalDescController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +27,8 @@ class _AddAnimalFormPageState extends State<AddAnimalFormPage> {
               Padding(
                 padding: EdgeInsets.only(bottom: 8.0),
                 child: TextField(
+                  controller: animalNameController,
+                  onChanged: (v) => animalNameController.text = v,
                   decoration: InputDecoration(
                     labelText: 'Name the Animal',
                   ),
@@ -30,6 +37,8 @@ class _AddAnimalFormPageState extends State<AddAnimalFormPage> {
               Padding(
                 padding: EdgeInsets.only(bottom: 8.0),
                 child: TextField(
+                  controller: animalLocationController,
+                  onChanged: (v) => animalLocationController.text = v,
                   decoration: InputDecoration(
                     labelText: 'Location of the Animal',
                   ),
@@ -38,6 +47,8 @@ class _AddAnimalFormPageState extends State<AddAnimalFormPage> {
               Padding(
                 padding: EdgeInsets.only(bottom: 8.0),
                 child: TextField(
+                  controller: animalDescController,
+                  onChanged: (v) => animalDescController.text = v,
                   decoration: InputDecoration(
                     labelText: 'All about the Animal',
                   ),
@@ -53,9 +64,7 @@ class _AddAnimalFormPageState extends State<AddAnimalFormPage> {
                         padding: EdgeInsets.all(12),
                         color: Colors.indigoAccent,
                         textColor: Colors.white,
-                        onPressed: () => {
-                              print('Animal Added'),
-                            });
+                        onPressed: () => submitAnimal(context));
                   },
                 ),
               ),
@@ -64,5 +73,15 @@ class _AddAnimalFormPageState extends State<AddAnimalFormPage> {
         ),
       ),
     );
+  }
+
+  submitAnimal(BuildContext context) {
+    if (animalNameController.text.isEmpty) {
+      print('Animal Name can not be empty');
+    } else {
+      var newAnimal = Dog(animalNameController.text,
+          animalLocationController.text, animalDescController.text, 'Breed B');
+      Navigator.of(context).pop(newAnimal);
+    }
   }
 }
